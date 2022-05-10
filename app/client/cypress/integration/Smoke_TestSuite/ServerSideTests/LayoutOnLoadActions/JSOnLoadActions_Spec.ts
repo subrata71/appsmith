@@ -106,4 +106,42 @@ describe("JSObjects OnLoad Actions tests", function() {
     });
     agHelper.NavigateBacktoEditor();
   });
+
+  it("6. Maintains order of async functions in settings tab alphabetically", function() {
+    jsEditor.CreateJSObject(
+      `export default {
+      getId: async () => {
+        return 8;
+      },
+      assert: async () => {
+        return 2
+      }  ,
+      base: async () => {
+        return 3
+      } ,
+    }`,
+      true,
+      true,
+      false,
+    );
+
+    agHelper.GetNClick(locator._jsEditorSettingsTab);
+    cy.get(locator._jsEditorFunctionSetting).then(function($lis) {
+      const asyncFunctionLength = $lis.length;
+      // Assert that there are three async functions
+      expect(asyncFunctionLength).to.equal(3);
+      // Expect the first on the list to be "assert"
+      expect($lis.eq(0)).to.have.class(
+        locator._jsEditorUniqueFunctionSettingClass("assert"),
+      );
+      // Expect the second on the list to be "base"
+      expect($lis.eq(1)).to.have.class(
+        locator._jsEditorUniqueFunctionSettingClass("base"),
+      );
+      // Expect the first on the list to be "getId"
+      expect($lis.eq(2)).to.have.class(
+        locator._jsEditorUniqueFunctionSettingClass("getId"),
+      );
+    });
+  });
 });

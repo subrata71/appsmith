@@ -69,4 +69,7 @@ export class CommonLocators {
     _multiSelectItem = (item: string) => "//span[text()='" + item + "']/ancestor::div[@class ='rc-select-selection-overflow-item']//span[contains(@class, 'remove-icon')]"
     _listWidget = "div[type='LIST_WIDGET']"
     _dropdownText = ".t--dropdown-option"
+    _jsEditorSettingsTab = ".tab-title:contains('Settings')"
+    _jsEditorFunctionSetting = ".t--on-page-load-setting"
+    _jsEditorUniqueFunctionSettingClass = (functionName: string)=>`${functionName}-on-page-load-setting`
 }
