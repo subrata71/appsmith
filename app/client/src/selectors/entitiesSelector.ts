@@ -792,7 +792,9 @@ export const getJSActions = (
     (jsCollectionData) => jsCollectionData.config.id === JSCollectionId,
   );
 
-  return jsCollection?.config.actions ?? [];
+  return jsCollection?.config.actions
+    ? sortBy(jsCollection?.config.actions, ["name"])
+    : [];
 };
 
 export const getActiveJSActionId = (
