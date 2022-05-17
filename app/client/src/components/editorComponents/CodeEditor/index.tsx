@@ -275,7 +275,7 @@ class CodeEditor extends Component<Props, State> {
       }
 
       const isReadOnly = !this.props.input.onChange || this.props.disabled;
-      if (this.props.showLineNumbers && !isReadOnly) {
+      if (!isReadOnly) {
         const autoIndentKey = getAutoIndentShortcutKey();
         options.extraKeys[autoIndentKey] = (editor) => {
           autoIndentCode(editor);
